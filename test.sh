@@ -10,6 +10,11 @@ touch "test/input/sub directory/child.mkv"
 touch "test/input/sub directory/With spaces (1999).mkv"
 touch "test/input/With spaces: the sequel (2004).mkv"
 
+function doencode {
+	cp -v "${INPUT_FILE}" "${TEMP_FILE}"
+}
+export -f doencode
+
 DEBUG=1 ./encode-drop.sh ./test/input ./test/output
 
 tree ./test

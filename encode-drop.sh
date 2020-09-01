@@ -35,7 +35,6 @@ fi
 debug "Files will be moved to '${DEST}'"
 
 function init() {
-	debug "***** INIT ${1} *****"
 	local dir="$(dirname "${1#${DROP}/}")"
 	local name="$(basename "${1}")"
 
@@ -47,15 +46,21 @@ function init() {
 
 	mkdir -p "${DEST}/${dir}"
 	OUTPUT_FILE="${DEST}/${dir}/${name}"
+
+	debug "* INPUT  ${INPUT_FILE}"
+	debug "* TEMP   ${TEMP_FILE}"
+	debug "* OUTPUT ${OUTPUT_FILE}"
 }
 
-function doencode() {
-	debug "***** ENCODE ${INPUT_FILE} *****"
-	cp -v "${INPUT_FILE}" "${TEMP_FILE}"
-}
+if type doencode > /dev/null; then
+	debug "Using hooked doencode function"
+else
+	function doencode() {
+		cp -v "${INPUT_FILE}" "${TEMP_FILE}"
+	}
+fi
 
 function finalize() {
-	debug "***** FINALIZE ${INPUT_FILE} *****"
 	mv -v "${TEMP_FILE}" "${OUTPUT_FILE}"
 	rm -v "${INPUT_FILE}"
 }
