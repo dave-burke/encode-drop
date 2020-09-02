@@ -72,7 +72,9 @@ fi
 
 function finalize() {
 	mv -v "${TEMP_FILE}" "${OUTPUT_FILE}"
-	rm -v "${INPUT_FILE}"
+	if [[ -z "${DEBUG}" ]]; then
+		rm -v "${INPUT_FILE}"
+	fi
 }
 
 find ${DROP} -type f | while read filename; do
