@@ -66,7 +66,7 @@ if type doencode > /dev/null; then
 	debug "Using hooked doencode function"
 else
 	function doencode() {
-		transcode $ARGS --output "${TEMP_FILE}" --add-audio=all --add-subtitle=all "${INPUT_FILE}"
+		transcode $ARGS --output "${TEMP_FILE}" --add-audio=all --add-subtitle=all "${INPUT_FILE}" </dev/null
 	}
 fi
 
