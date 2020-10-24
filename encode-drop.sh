@@ -62,7 +62,7 @@ function init() {
 	debug "* OUTPUT ${OUTPUT_FILE}"
 }
 
-if type doencode > /dev/null; then
+if type doencode 2>&1 > /dev/null; then
 	debug "Using hooked doencode function"
 else
 	function doencode() {
